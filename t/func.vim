@@ -1,11 +1,28 @@
 filetype plugin on
-runtime! plugin/operator/delblock.vim
+runtime! plugin/operator/*.vim
+
 scriptencoding utf-8
+
+map <silent>sd <Plug>(operator-delblock)
+let g:__ = 'koreha dummy string __'
+let g:_f = 'koreha dummy string _f'
+
+let g:operator#delblock#config = {
+\ '-' : {
+\   'merge_default_config' : 1,
+\   'block' : [
+\     {'start': '\k\+(', 'end': ')'},
+\     {'start': '\k\+\[', 'end': '\]'},
+\   ]},
+\}
+
+
 
 function! s:paste_code(lines)
   put =a:lines
   1 delete _
 endfunction
+
 
 describe 'del-char'
   before
